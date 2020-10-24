@@ -9,10 +9,12 @@ import Foundation
 
 struct StringsText {
     struct Home {
-        static let filterText = "Type a city"
-        static let notInfo = "Not Info"
-        static let latitude = "Lat"
-        static let longitude = "Long"
-        static let cityCellIdentifier = "Cities"
+        static let filterText: String = "Type a city"
+        static let notInfo: String = "Not Info"
+        static let latitude: String = "Lat"
+        static let longitude: String = "Long"
+        static let cityCellIdentifier: String = "Cities"
+        static let deleteItemInCitiesCollectionView: String = "Delete"
+        static let editButtonText: String = "Edit"
     }
 }

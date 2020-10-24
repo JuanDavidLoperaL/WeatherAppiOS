@@ -13,9 +13,30 @@ typealias LocationInfo = (cityName: String, coordinates: CLLocationCoordinate2D)
 
 final class HomeViewModel {
     
+    // MARK: - Enum
+    enum EditButtonStates: String {
+        case editing = "Ok"
+        case notEditing = "Edit"
+        
+        mutating func switchState() {
+            switch self {
+            case .editing:
+                self = .notEditing
+            case .notEditing:
+                self = .editing
+            }
+        }
+    }
+    
     // MARK: - Private Properties
     private let api: HomeAPIProtocol
-    private var coordinatesInMap: [LocationInfo] = [LocationInfo]()
+    private var editButtonState: EditButtonStates = .notEditing
+    private var annotations: [MKPointAnnotation] = [MKPointAnnotation]()
+    private var coordinatesInMap: [LocationInfo] = [LocationInfo]() {
+        didSet {
+            delegate?.editButton(shouldShow: shouldShowEditButton)
+        }
+    }
     
     // MARK: - Internal Properties
     var cellIndex: Int = 0
@@ -43,10 +64,35 @@ final class HomeViewModel {
             return StringsText.Home.notInfo
         }
     }
+    
+    var isEditing: Bool {
+        return editButtonState == .notEditing
+    }
+    
+    var editButtonText: String {
+        return editButtonState.rawValue
+    }
+    
+    var shouldShowEditButton: Bool {
+        return coordinatesInMap.isEmpty
+    }
 }
 
 // MARK: - Internal Functions
 extension HomeViewModel {
+    
+    func deleteItem(at index: Int) {
+        coordinatesInMap.remove(at: index)
+        delegate?.reloadCitiesList()
+        delegate?.remove(annotation: annotations[index])
+    }
+    
+    func editButtonTouched() {
+        editButtonState.switchState()
+        delegate?.changeEditButton(text: editButtonState.rawValue)
+        delegate?.reloadCitiesList()
+    }
+    
     func getSetionsAmountInCollection() -> Int {
         return 1
     }
@@ -60,6 +106,7 @@ extension HomeViewModel {
             if wasSuccess {
                 let annotationInMap: MKPointAnnotation = MKPointAnnotation()
                 annotationInMap.coordinate = CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)
+                self?.annotations.append(annotationInMap)
                 self?.delegate?.add(annotationInMap: annotationInMap)
                 self?.delegate?.reloadCitiesList()
             } else {
