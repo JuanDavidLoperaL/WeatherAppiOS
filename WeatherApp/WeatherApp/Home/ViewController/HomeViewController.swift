@@ -10,6 +10,9 @@ import UIKit
 
 protocol HomeViewControllerDelegate: AnyObject {
     func add(annotationInMap: MKPointAnnotation)
+    func editButton(shouldShow: Bool)
+    func changeEditButton(text: String)
+    func remove(annotation: MKPointAnnotation)
     func reloadCitiesList()
 }
 
@@ -59,11 +62,27 @@ extension HomeViewController: HomeViewControllerDelegate {
     func reloadCitiesList() {
         baseView.reloadCitiesList()
     }
+    
+    func editButton(shouldShow: Bool) {
+        baseView.editButton(shouldShow: shouldShow)
+    }
+    
+    func changeEditButton(text: String) {
+        baseView.changeEditButton(text: text)
+    }
+    
+    func remove(annotation: MKPointAnnotation) {
+        baseView.remove(annotation: annotation)
+    }
 }
 
 // MARK: - Protocol BaseView
 extension HomeViewController: HomeBaseViewDelegate {
     func userTouchInMap(tap: CLLocationCoordinate2D) {
         viewModel.getAnnotation(with: tap)
+    }
+    
+    func editButtonTouched() {
+        viewModel.editButtonTouched()
     }
 }

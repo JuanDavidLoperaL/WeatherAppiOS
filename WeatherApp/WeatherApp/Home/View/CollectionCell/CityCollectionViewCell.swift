@@ -10,6 +10,32 @@ import UIKit
 final class CityCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Private UI Properties
+    private let containerStackView: UIStackView = {
+        let stackView: UIStackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        return stackView
+    }()
+    
+    private let containerCityInfoView: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    private let deleteItemButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(StringsText.Home.deleteItemInCitiesCollectionView, for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 10)
+        button.backgroundColor = .red
+        return button
+    }()
+    
     private let cityNameLabel: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -53,6 +79,7 @@ final class CityCollectionViewCell: UICollectionViewCell {
     // MARK: - Life Cycle
     override func draw(_ rect: CGRect) {
         setup()
+        deleteItemButton.addTarget(self, action: #selector(deleteItem), for: .touchDown)
     }
 }
 
@@ -64,6 +91,9 @@ extension CityCollectionViewCell: ViewConfiguration {
     }
     
     func addViews() {
+        contentView.addSubview(containerStackView)
+        containerStackView.addArrangedSubview(deleteItemButton)
+        containerStackView.addArrangedSubview(containerCityInfoView)
         contentView.addSubview(cityNameLabel)
         contentView.addSubview(cityLocationLabel)
         contentView.addSubview(rightArrowImageView)
@@ -71,19 +101,29 @@ extension CityCollectionViewCell: ViewConfiguration {
     
     func contrainsViews() {
         NSLayoutConstraint.activate([
-            cityNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            cityNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            cityNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
+            containerStackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            containerStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            containerStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            containerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            deleteItemButton.topAnchor.constraint(equalTo: containerStackView.topAnchor, constant: 8),
+            deleteItemButton.leadingAnchor.constraint(equalTo: containerStackView.leadingAnchor, constant: 8),
+            deleteItemButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            deleteItemButton.widthAnchor.constraint(equalToConstant: 40),
+            
+            cityNameLabel.topAnchor.constraint(equalTo: containerCityInfoView.topAnchor),
+            cityNameLabel.leadingAnchor.constraint(equalTo: containerCityInfoView.leadingAnchor, constant: 8),
+            cityNameLabel.trailingAnchor.constraint(equalTo: containerCityInfoView.trailingAnchor, constant: -30),
             cityNameLabel.heightAnchor.constraint(equalToConstant: 16),
             
             cityLocationLabel.topAnchor.constraint(equalTo: cityNameLabel.bottomAnchor, constant: 5),
-            cityLocationLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            cityLocationLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
+            cityLocationLabel.leadingAnchor.constraint(equalTo: containerCityInfoView.leadingAnchor, constant: 8),
+            cityLocationLabel.trailingAnchor.constraint(equalTo: containerCityInfoView.trailingAnchor, constant: -30),
             cityLocationLabel.heightAnchor.constraint(equalToConstant: 40),
             
-            rightArrowImageView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 8),
-            rightArrowImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            rightArrowImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            rightArrowImageView.topAnchor.constraint(equalTo: containerCityInfoView.topAnchor,constant: 8),
+            rightArrowImageView.trailingAnchor.constraint(equalTo: containerCityInfoView.trailingAnchor),
+            rightArrowImageView.bottomAnchor.constraint(equalTo: containerCityInfoView.bottomAnchor),
             rightArrowImageView.widthAnchor.constraint(equalToConstant: 25)
         ])
     }
@@ -102,7 +142,13 @@ extension CityCollectionViewCell {
 // MARK: - Private Function
 extension CityCollectionViewCell {
     private func setupInfo() {
+        deleteItemButton.isHidden = viewModel?.isEditing ?? true
         cityNameLabel.text = viewModel?.cityName ?? StringsText.Home.notInfo
         cityLocationLabel.text = viewModel?.cityLocation ?? StringsText.Home.notInfo
+    }
+    
+    @objc
+    private func deleteItem() {
+        viewModel?.deleteItem(at: index)
     }
 }

@@ -9,11 +9,26 @@ import UIKit
 
 protocol HomeBaseViewDelegate: AnyObject {
     func userTouchInMap(tap: CLLocationCoordinate2D)
+    func editButtonTouched()
 }
 
 final class HomeBaseView: UIView {
     
     // MARK: - Private UI Properties
+    private let editButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle(StringsText.Home.editButtonText, for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 5
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.systemYellow.cgColor
+        button.addTarget(self, action: #selector(editButtonAction), for: .touchDown)
+        button.isHidden = true
+        return button
+    }()
+    
     private let mainMap: MKMapView = {
         let map: MKMapView = MKMapView()
         map.translatesAutoresizingMaskIntoConstraints = false
@@ -86,6 +101,7 @@ extension HomeBaseView: ViewConfiguration {
         self.addSubview(citiesContainer)
         citiesContainer.addSubview(filterTextField)
         citiesContainer.addSubview(citiesListCollectionView)
+        self.addSubview(editButton)
     }
     
     func contrainsViews() {
@@ -108,7 +124,12 @@ extension HomeBaseView: ViewConfiguration {
             citiesListCollectionView.topAnchor.constraint(equalTo: filterTextField.bottomAnchor, constant: 8),
             citiesListCollectionView.leadingAnchor.constraint(equalTo: citiesContainer.leadingAnchor, constant: 16),
             citiesListCollectionView.trailingAnchor.constraint(equalTo: citiesContainer.trailingAnchor, constant: -16),
-            citiesListCollectionView.bottomAnchor.constraint(equalTo: citiesContainer.bottomAnchor, constant: -8)
+            citiesListCollectionView.bottomAnchor.constraint(equalTo: citiesContainer.bottomAnchor, constant: -8),
+            
+            editButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 30),
+            editButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            editButton.widthAnchor.constraint(equalToConstant: 50),
+            editButton.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
 }
@@ -132,10 +153,28 @@ extension HomeBaseView: UIGestureRecognizerDelegate {
             delegate?.userTouchInMap(tap: tapPoint)
         }
     }
+    
+    @objc
+    private func editButtonAction() {
+        delegate?.editButtonTouched()
+    }
 }
 
 // MARK: - Internal Functions
 extension HomeBaseView {
+    
+    func remove(annotation: MKPointAnnotation) {
+        mainMap.removeAnnotation(annotation)
+    }
+    
+    func editButton(shouldShow: Bool) {
+        editButton.isHidden = shouldShow
+    }
+    
+    func changeEditButton(text: String) {
+        editButton.setTitle(text, for: .normal)
+    }
+    
     func add(annotationInMap: MKPointAnnotation) {
         mainMap.addAnnotation(annotationInMap)
     }
