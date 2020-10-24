@@ -21,6 +21,9 @@
 		AC3036632544890300FE66B4 /* HomeBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3036622544890300FE66B4 /* HomeBaseView.swift */; };
 		AC30366C2544909100FE66B4 /* StringsText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC30366B2544909100FE66B4 /* StringsText.swift */; };
 		AC3036752544997D00FE66B4 /* ErrorTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3036742544997D00FE66B4 /* ErrorTypes.swift */; };
+		ACB22E222544A3BF00F577D2 /* CityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB22E212544A3BF00F577D2 /* CityCollectionViewCell.swift */; };
+		ACB422EB2544B0EF00F114C2 /* DatasourceCitiesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB422EA2544B0EF00F114C2 /* DatasourceCitiesCollectionView.swift */; };
+		ACB422F02544B12100F114C2 /* DelegateCitiesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB422EF2544B12100F114C2 /* DelegateCitiesCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,9 @@
 		AC3036622544890300FE66B4 /* HomeBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBaseView.swift; sourceTree = "<group>"; };
 		AC30366B2544909100FE66B4 /* StringsText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringsText.swift; sourceTree = "<group>"; };
 		AC3036742544997D00FE66B4 /* ErrorTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTypes.swift; sourceTree = "<group>"; };
+		ACB22E212544A3BF00F577D2 /* CityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCollectionViewCell.swift; sourceTree = "<group>"; };
+		ACB422EA2544B0EF00F114C2 /* DatasourceCitiesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasourceCitiesCollectionView.swift; sourceTree = "<group>"; };
+		ACB422EF2544B12100F114C2 /* DelegateCitiesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateCitiesCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +188,7 @@
 		AC180840254476FF00C88580 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				ACB22E172544A17400F577D2 /* DatasourceDelegateCollectionView */,
 				AC1808232544704600C88580 /* HomeViewController.swift */,
 			);
 			path = ViewController;
@@ -206,6 +213,7 @@
 		AC303661254488F400FE66B4 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ACB22E202544A39F00F577D2 /* CollectionCell */,
 				AC3036622544890300FE66B4 /* HomeBaseView.swift */,
 			);
 			path = View;
@@ -225,6 +233,23 @@
 				AC3036742544997D00FE66B4 /* ErrorTypes.swift */,
 			);
 			path = ErrorEnum;
+			sourceTree = "<group>";
+		};
+		ACB22E172544A17400F577D2 /* DatasourceDelegateCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				ACB422EA2544B0EF00F114C2 /* DatasourceCitiesCollectionView.swift */,
+				ACB422EF2544B12100F114C2 /* DelegateCitiesCollectionView.swift */,
+			);
+			path = DatasourceDelegateCollectionView;
+			sourceTree = "<group>";
+		};
+		ACB22E202544A39F00F577D2 /* CollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				ACB22E212544A3BF00F577D2 /* CityCollectionViewCell.swift */,
+			);
+			path = CollectionCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,11 +385,14 @@
 				AC1807E825446C5400C88580 /* AppDelegate.swift in Sources */,
 				AC30365A25447FEB00FE66B4 /* HomeAPI.swift in Sources */,
 				AC30366C2544909100FE66B4 /* StringsText.swift in Sources */,
+				ACB22E222544A3BF00F577D2 /* CityCollectionViewCell.swift in Sources */,
 				AC3036752544997D00FE66B4 /* ErrorTypes.swift in Sources */,
 				AC1807EA25446C5400C88580 /* SceneDelegate.swift in Sources */,
 				AC18083C2544733D00C88580 /* ViewProtocol.swift in Sources */,
 				AC30365425447FCC00FE66B4 /* HomeViewModel.swift in Sources */,
+				ACB422EB2544B0EF00F114C2 /* DatasourceCitiesCollectionView.swift in Sources */,
 				AC1808242544704600C88580 /* HomeViewController.swift in Sources */,
+				ACB422F02544B12100F114C2 /* DelegateCitiesCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

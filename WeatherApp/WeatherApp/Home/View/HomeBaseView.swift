@@ -38,18 +38,22 @@ final class HomeBaseView: UIView {
     
     private let citiesListCollectionView: UICollectionView = {
         let flowLayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
         flowLayout.minimumLineSpacing = 10
+        flowLayout.scrollDirection = .vertical
         flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         let collectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsVerticalScrollIndicator = false
+        collectionView.backgroundColor = .clear
+        collectionView.register(CityCollectionViewCell.self, forCellWithReuseIdentifier: StringsText.Home.cityCellIdentifier)
         collectionView.backgroundColor = .clear
         return collectionView
     }()
     
     // MARK: - Private Properties
     private let longPressGesture: UILongPressGestureRecognizer = UILongPressGestureRecognizer()
+    private var datasourceCitiesCollectionView: DatasourceCitiesCollectionView = DatasourceCitiesCollectionView()
+    private var delegateCitiesCollectionView: DelegateCitiesCollectionView = DelegateCitiesCollectionView()
     
     // MARK: - Delegate
     weak var delegate: HomeBaseViewDelegate?
@@ -134,5 +138,17 @@ extension HomeBaseView: UIGestureRecognizerDelegate {
 extension HomeBaseView {
     func add(annotationInMap: MKPointAnnotation) {
         mainMap.addAnnotation(annotationInMap)
+    }
+    
+    func setViewModelInCollectionView(viewModel: HomeViewModel) {
+        datasourceCitiesCollectionView.viewModel = viewModel
+        delegateCitiesCollectionView.viewModel = viewModel
+        citiesListCollectionView.delegate = delegateCitiesCollectionView
+        citiesListCollectionView.dataSource = datasourceCitiesCollectionView
+        citiesListCollectionView.reloadData()
+    }
+    
+    func reloadCitiesList() {
+        citiesListCollectionView.reloadData()
     }
 }

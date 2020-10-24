@@ -17,11 +17,31 @@ final class HomeViewModel {
     private let api: HomeAPIProtocol
     private var coordinatesInMap: [LocationInfo] = [LocationInfo]()
     
+    // MARK: - Internal Properties
+    var cellIndex: Int = 0
+    
     // MARK: - Delegates
     weak var delegate: HomeViewControllerDelegate?
     
     init(api: HomeAPIProtocol = HomeAPI()) {
         self.api = api
+    }
+    
+    // MARK: - Computed Properties
+    var cityName: String {
+        if coordinatesInMap.indices.contains(cellIndex) {
+            return coordinatesInMap[cellIndex].cityName
+        } else{
+            return StringsText.Home.notInfo
+        }
+    }
+    
+    var cityLocation: String {
+        if coordinatesInMap.indices.contains(cellIndex) {
+            return "\(StringsText.Home.latitude): \(coordinatesInMap[cellIndex].coordinates.latitude)\n\(StringsText.Home.longitude): \(coordinatesInMap[cellIndex].coordinates.longitude)"
+        } else {
+            return StringsText.Home.notInfo
+        }
     }
 }
 
@@ -41,6 +61,7 @@ extension HomeViewModel {
                 let annotationInMap: MKPointAnnotation = MKPointAnnotation()
                 annotationInMap.coordinate = CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)
                 self?.delegate?.add(annotationInMap: annotationInMap)
+                self?.delegate?.reloadCitiesList()
             } else {
                 //TODO: Put a Error view and say try again
             }

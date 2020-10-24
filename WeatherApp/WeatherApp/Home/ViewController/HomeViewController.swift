@@ -10,6 +10,7 @@ import UIKit
 
 protocol HomeViewControllerDelegate: AnyObject {
     func add(annotationInMap: MKPointAnnotation)
+    func reloadCitiesList()
 }
 
 final class HomeViewController: UIViewController {
@@ -40,6 +41,7 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         baseView.delegate = self
+        baseView.setViewModelInCollectionView(viewModel: viewModel)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +54,10 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: HomeViewControllerDelegate {
     func add(annotationInMap: MKPointAnnotation) {
         baseView.add(annotationInMap: annotationInMap)
+    }
+    
+    func reloadCitiesList() {
+        baseView.reloadCitiesList()
     }
 }
 
