@@ -92,4 +92,9 @@ extension HomeViewController: HomeBaseViewDelegate {
     func editButtonTouched() {
         viewModel.editButtonTouched()
     }
+    
+    func settingsButtonTouched() {
+        let settingsViewController: SettingsViewController = SettingsViewController()
+        self.navigationController?.pushViewController(settingsViewController, animated: true)
+    }
 }

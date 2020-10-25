@@ -89,7 +89,8 @@ extension HomeViewModel {
     func deleteItem(at index: Int) {
         coordinatesInMap.remove(at: index)
         delegate?.reloadCitiesList()
-        delegate?.remove(annotation: annotations[index])
+        let annotationToRemove: MKPointAnnotation = annotations.remove(at: index)
+        delegate?.remove(annotation: annotationToRemove)
     }
     
     func editButtonTouched() {

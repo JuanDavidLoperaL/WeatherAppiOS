@@ -10,11 +10,35 @@ import UIKit
 protocol HomeBaseViewDelegate: AnyObject {
     func userTouchInMap(tap: CLLocationCoordinate2D)
     func editButtonTouched()
+    func settingsButtonTouched()
 }
 
 final class HomeBaseView: UIView {
     
     // MARK: - Private UI Properties
+    private let settingsContainer: UIView = {
+        let view: UIView = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        view.layer.cornerRadius = 8
+        return view
+    }()
+    
+    private let settingsImageView: UIImageView = {
+        let imageView: UIImageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "settingsIcon")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    private let settingsButton: UIButton = {
+        let button: UIButton = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(settingsButtonAction), for: .touchDown)
+        return button
+    }()
+    
     private let editButton: UIButton = {
         let button: UIButton = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -102,6 +126,9 @@ extension HomeBaseView: ViewConfiguration {
         citiesContainer.addSubview(filterTextField)
         citiesContainer.addSubview(citiesListCollectionView)
         self.addSubview(editButton)
+        self.addSubview(settingsContainer)
+        settingsContainer.addSubview(settingsImageView)
+        settingsContainer.addSubview(settingsButton)
     }
     
     func contrainsViews() {
@@ -129,7 +156,22 @@ extension HomeBaseView: ViewConfiguration {
             editButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 30),
             editButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             editButton.widthAnchor.constraint(equalToConstant: 50),
-            editButton.heightAnchor.constraint(equalToConstant: 30)
+            editButton.heightAnchor.constraint(equalToConstant: 30),
+            
+            settingsContainer.topAnchor.constraint(equalTo: self.topAnchor, constant: 30),
+            settingsContainer.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            settingsContainer.widthAnchor.constraint(equalToConstant: 30),
+            settingsContainer.heightAnchor.constraint(equalToConstant: 30),
+            
+            settingsImageView.topAnchor.constraint(equalTo: settingsContainer.topAnchor),
+            settingsImageView.leadingAnchor.constraint(equalTo: settingsContainer.leadingAnchor),
+            settingsImageView.trailingAnchor.constraint(equalTo: settingsContainer.trailingAnchor),
+            settingsImageView.bottomAnchor.constraint(equalTo: settingsContainer.bottomAnchor),
+            
+            settingsButton.topAnchor.constraint(equalTo: settingsContainer.topAnchor),
+            settingsButton.leadingAnchor.constraint(equalTo: settingsContainer.leadingAnchor),
+            settingsButton.trailingAnchor.constraint(equalTo: settingsContainer.trailingAnchor),
+            settingsButton.bottomAnchor.constraint(equalTo: settingsContainer.bottomAnchor)
         ])
     }
 }
@@ -157,6 +199,11 @@ extension HomeBaseView: UIGestureRecognizerDelegate {
     @objc
     private func editButtonAction() {
         delegate?.editButtonTouched()
+    }
+    
+    @objc
+    private func settingsButtonAction() {
+        delegate?.settingsButtonTouched()
     }
 }
 

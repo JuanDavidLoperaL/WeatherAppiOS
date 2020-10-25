@@ -67,7 +67,7 @@ extension CityDetailAPI {
         let city: String = cityName.replacingOccurrences(of: " ", with: "+")
         let queryItems = [URLQueryItem(name: "q", value: city),
                           URLQueryItem(name: "appid", value: apiKey),
-                          URLQueryItem(name: "units", value: "metric")]
+                          URLQueryItem(name: "units", value: AppSettingsManager.shared.currentUnits.getUnits())]
         var urlComponent = URLComponents()
         urlComponent.scheme = scheme
         urlComponent.host = host
