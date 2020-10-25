@@ -52,7 +52,7 @@ final class CityDetailBaseView: UIView {
 // MARK: - Protocol View Setup
 extension CityDetailBaseView: ViewConfiguration {
     func configureUI() {
-        self.backgroundColor = .white
+        self.backgroundColor = AppSettingsManager.shared.currentColor.getColor()
     }
     
     func addViews() {
