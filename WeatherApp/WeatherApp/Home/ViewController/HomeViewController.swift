@@ -14,6 +14,7 @@ protocol HomeViewControllerDelegate: AnyObject {
     func changeEditButton(text: String)
     func remove(annotation: MKPointAnnotation)
     func reloadCitiesList()
+    func navigateToCityDetail(with cityInfo: LocationInfo)
 }
 
 final class HomeViewController: UIViewController {
@@ -73,6 +74,12 @@ extension HomeViewController: HomeViewControllerDelegate {
     
     func remove(annotation: MKPointAnnotation) {
         baseView.remove(annotation: annotation)
+    }
+    
+    func navigateToCityDetail(with cityInfo: LocationInfo) {
+        let viewModel: CityDetailViewModel = CityDetailViewModel(cityInfo: cityInfo)
+        let cityDetail: CityDetailViewController = CityDetailViewController(viewModel: viewModel)
+        self.navigationController?.pushViewController(cityDetail, animated: true)
     }
 }
 

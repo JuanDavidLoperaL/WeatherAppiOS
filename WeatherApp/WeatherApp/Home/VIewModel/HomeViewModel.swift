@@ -29,7 +29,6 @@ final class HomeViewModel {
     }
     
     // MARK: - Private Properties
-    private let api: HomeAPIProtocol
     private var editButtonState: EditButtonStates = .notEditing
     private var annotations: [MKPointAnnotation] = [MKPointAnnotation]()
     private var coordinatesInMap: [LocationInfo] = [LocationInfo]() {
@@ -40,12 +39,18 @@ final class HomeViewModel {
     
     // MARK: - Internal Properties
     var cellIndex: Int = 0
+    var itemSelected: Int = 0 {
+        didSet {
+            if coordinatesInMap.indices.contains(itemSelected) {
+                delegate?.navigateToCityDetail(with: coordinatesInMap[itemSelected])
+            }
+        }
+    }
     
     // MARK: - Delegates
     weak var delegate: HomeViewControllerDelegate?
     
-    init(api: HomeAPIProtocol = HomeAPI()) {
-        self.api = api
+    init() {
     }
     
     // MARK: - Computed Properties
@@ -114,10 +119,6 @@ extension HomeViewModel {
             }
         }
 
-    }
-    
-    func getWeatherFor(city: Int) {
-        
     }
 }
 
