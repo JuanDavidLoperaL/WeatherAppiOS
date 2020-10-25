@@ -97,4 +97,9 @@ extension HomeViewController: HomeBaseViewDelegate {
         let settingsViewController: SettingsViewController = SettingsViewController()
         self.navigationController?.pushViewController(settingsViewController, animated: true)
     }
+    
+    func helpButtonTouched() {
+        let helpViewController: HelpScreenViewController = HelpScreenViewController()
+        self.navigationController?.pushViewController(helpViewController, animated: true)
+    }
 }
