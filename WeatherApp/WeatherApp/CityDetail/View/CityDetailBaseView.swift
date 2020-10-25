@@ -37,6 +37,29 @@ final class CityDetailBaseView: UIView {
         return stackView
     }()
     
+    private let nextFourDaysLabel: UILabel = {
+        let label: UILabel = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.font = .boldSystemFont(ofSize: 15)
+        label.textAlignment = .left
+        label.text = StringsText.CityDetail.nextDays
+        return label
+    }()
+    
+    private let nextDaysTableView: UITableView = {
+        let tableView: UITableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .clear
+        tableView.tableFooterView = UIView()
+        tableView.register(ForecastTableViewCell.self, forCellReuseIdentifier: StringsText.CityDetail.forecastCellIdentifier)
+        return tableView
+    }()
+    
+    // MARK: - Private Properties
+    private var datasourceTableView: DatasourceNextDaysTableView = DatasourceNextDaysTableView()
+    private var delegateTableView: DelegateNextDaysTableView = DelegateNextDaysTableView()
+    
     // MARK: - Internal Init
     init() {
         super.init(frame: .zero)
@@ -59,6 +82,8 @@ extension CityDetailBaseView: ViewConfiguration {
         addSubview(dayLabel)
         addSubview(temperatureLabel)
         addSubview(todayForecastStackView)
+        addSubview(nextFourDaysLabel)
+        addSubview(nextDaysTableView)
     }
     
     func contrainsViews() {
@@ -76,7 +101,15 @@ extension CityDetailBaseView: ViewConfiguration {
             todayForecastStackView.topAnchor.constraint(equalTo: temperatureLabel.bottomAnchor, constant: 10),
             todayForecastStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             todayForecastStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            todayForecastStackView.heightAnchor.constraint(equalToConstant: 70)
+            todayForecastStackView.heightAnchor.constraint(equalToConstant: 70),
+            
+            nextFourDaysLabel.topAnchor.constraint(equalTo: todayForecastStackView.bottomAnchor, constant: 15),
+            nextFourDaysLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            
+            nextDaysTableView.topAnchor.constraint(equalTo: nextFourDaysLabel.bottomAnchor, constant: 10),
+            nextDaysTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            nextDaysTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            nextDaysTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
         ])
     }
 }
@@ -89,6 +122,20 @@ extension CityDetailBaseView {
         dayLabel.text = day
         temperatureLabel.text = temperature
         setupTodayForecastStackView(principalInformation: principalInformation)
+    }
+    
+    func setViewModelInTableView(viewModel: CityDetailViewModel) {
+        datasourceTableView.viewModel = viewModel
+        delegateTableView.viewModel = viewModel
+        nextDaysTableView.dataSource = datasourceTableView
+        nextDaysTableView.delegate = delegateTableView
+        nextDaysTableView.reloadData()
+    }
+    
+    func reloadTableView() {
+        DispatchQueue.main.async { [self] in
+            nextDaysTableView.reloadData()
+        }
     }
 }
 

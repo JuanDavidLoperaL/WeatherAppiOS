@@ -11,4 +11,12 @@ struct TodayForecast: Decodable {
     var main: MainForecast
     var wind: WindForecast
     var clouds: CloudsForecast
+    var day: String
+    
+    enum CodingKeys: String, CodingKey {
+        case main
+        case wind
+        case clouds
+        case day = "dt_txt"
+    }
 }

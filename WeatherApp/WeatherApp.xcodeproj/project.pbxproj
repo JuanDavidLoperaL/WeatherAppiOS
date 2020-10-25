@@ -28,6 +28,10 @@
 		AC6A9884254518A800D55481 /* SectionsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6A9883254518A800D55481 /* SectionsSettings.swift */; };
 		AC6A9889254518C800D55481 /* ItemSectionSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6A9888254518C800D55481 /* ItemSectionSettings.swift */; };
 		AC6A988F2545252C00D55481 /* AppSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6A988E2545252C00D55481 /* AppSettingsManager.swift */; };
+		AC6A98A6254537D400D55481 /* ForecastList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6A98A5254537D400D55481 /* ForecastList.swift */; };
+		AC6A98AC2545405100D55481 /* DatasourceNextDaysTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6A98AB2545405000D55481 /* DatasourceNextDaysTableView.swift */; };
+		AC6A98B12545405B00D55481 /* DelegateNextDaysTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6A98B02545405B00D55481 /* DelegateNextDaysTableView.swift */; };
+		AC6A98B72545427500D55481 /* ForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6A98B62545427500D55481 /* ForecastTableViewCell.swift */; };
 		AC7D27E72544C8C800060300 /* CityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7D27E62544C8C800060300 /* CityDetailViewController.swift */; };
 		AC7D27ED2544CA3400060300 /* CityDetailBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7D27EC2544CA3400060300 /* CityDetailBaseView.swift */; };
 		AC7D27F62544CB2C00060300 /* CityDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7D27F52544CB2C00060300 /* CityDetailViewModel.swift */; };
@@ -90,6 +94,10 @@
 		AC6A9883254518A800D55481 /* SectionsSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsSettings.swift; sourceTree = "<group>"; };
 		AC6A9888254518C800D55481 /* ItemSectionSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemSectionSettings.swift; sourceTree = "<group>"; };
 		AC6A988E2545252C00D55481 /* AppSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsManager.swift; sourceTree = "<group>"; };
+		AC6A98A5254537D400D55481 /* ForecastList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastList.swift; sourceTree = "<group>"; };
+		AC6A98AB2545405000D55481 /* DatasourceNextDaysTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatasourceNextDaysTableView.swift; sourceTree = "<group>"; };
+		AC6A98B02545405B00D55481 /* DelegateNextDaysTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegateNextDaysTableView.swift; sourceTree = "<group>"; };
+		AC6A98B62545427500D55481 /* ForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewCell.swift; sourceTree = "<group>"; };
 		AC7D27E62544C8C800060300 /* CityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailViewController.swift; sourceTree = "<group>"; };
 		AC7D27EC2544CA3400060300 /* CityDetailBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailBaseView.swift; sourceTree = "<group>"; };
 		AC7D27F52544CB2C00060300 /* CityDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailViewModel.swift; sourceTree = "<group>"; };
@@ -317,6 +325,23 @@
 			path = AppSettingManager;
 			sourceTree = "<group>";
 		};
+		AC6A98AA2545403A00D55481 /* DatasourceDelegateTableView */ = {
+			isa = PBXGroup;
+			children = (
+				AC6A98AB2545405000D55481 /* DatasourceNextDaysTableView.swift */,
+				AC6A98B02545405B00D55481 /* DelegateNextDaysTableView.swift */,
+			);
+			path = DatasourceDelegateTableView;
+			sourceTree = "<group>";
+		};
+		AC6A98B52545426200D55481 /* CellTableView */ = {
+			isa = PBXGroup;
+			children = (
+				AC6A98B62545427500D55481 /* ForecastTableViewCell.swift */,
+			);
+			path = CellTableView;
+			sourceTree = "<group>";
+		};
 		AC7D27E42544C8A600060300 /* CityDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,6 +358,7 @@
 		AC7D27E52544C8B400060300 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				AC6A98AA2545403A00D55481 /* DatasourceDelegateTableView */,
 				AC7D27E62544C8C800060300 /* CityDetailViewController.swift */,
 			);
 			path = ViewController;
@@ -341,6 +367,7 @@
 		AC7D27EB2544CA2900060300 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AC6A98B52545426200D55481 /* CellTableView */,
 				AC7D27EC2544CA3400060300 /* CityDetailBaseView.swift */,
 			);
 			path = View;
@@ -378,6 +405,7 @@
 				AC7D28132544D73100060300 /* MainForecast.swift */,
 				AC7D28182544D80D00060300 /* WindForecast.swift */,
 				AC7D281D2544D82900060300 /* CloudsForecast.swift */,
+				AC6A98A5254537D400D55481 /* ForecastList.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -574,6 +602,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC6A98B12545405B00D55481 /* DelegateNextDaysTableView.swift in Sources */,
+				AC6A98AC2545405100D55481 /* DatasourceNextDaysTableView.swift in Sources */,
+				AC6A98A6254537D400D55481 /* ForecastList.swift in Sources */,
 				AC3036632544890300FE66B4 /* HomeBaseView.swift in Sources */,
 				AC6A98642545125800D55481 /* DatasourceSettingsTableView.swift in Sources */,
 				AC1807E825446C5400C88580 /* AppDelegate.swift in Sources */,
@@ -582,6 +613,7 @@
 				AC7D281E2544D82900060300 /* CloudsForecast.swift in Sources */,
 				AC30366C2544909100FE66B4 /* StringsText.swift in Sources */,
 				AC6A9889254518C800D55481 /* ItemSectionSettings.swift in Sources */,
+				AC6A98B72545427500D55481 /* ForecastTableViewCell.swift in Sources */,
 				AC6A986C2545126200D55481 /* DelegateSettingsTableView.swift in Sources */,
 				ACB22E222544A3BF00F577D2 /* CityCollectionViewCell.swift in Sources */,
 				ACB423002544B6A100F114C2 /* DelegateCitiesCollectionView.swift in Sources */,
