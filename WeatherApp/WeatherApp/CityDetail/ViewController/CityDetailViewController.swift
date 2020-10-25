@@ -9,6 +9,7 @@ import UIKit
 
 protocol CityDetailViewControllerDelegate: AnyObject {
     func setupTodayForecast()
+    func reloadTableView()
 }
 
 final class CityDetailViewController: UIViewController {
@@ -40,6 +41,7 @@ final class CityDetailViewController: UIViewController {
         viewModel.delegate = self
         viewModel.getWeather()
         self.title = "\(viewModel.cityName) Details"
+        baseView.setViewModelInTableView(viewModel: viewModel)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,5 +57,9 @@ extension CityDetailViewController: CityDetailViewControllerDelegate {
                                              temperature: viewModel.todayTemperature,
                                              principalInformation: viewModel.todayPrincipalInformation)
         }
+    }
+    
+    func reloadTableView() {
+        baseView.reloadTableView()
     }
 }

@@ -13,5 +13,7 @@ extension StringsText {
         static let todayHumidityHeaderName: String = "Humidity"
         static let todayWindHeaderName: String = "Wind"
         static let todayRainChancesHeaderName: String = "Rain"
+        static let nextDays: String = "Next 4 Days"
+        static let forecastCellIdentifier: String = "forecastCell"
     }
 }

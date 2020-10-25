@@ -8,7 +8,7 @@
 import Foundation
 
 protocol CityDetailAPIProtocol: AnyObject {
-    func getWeather(for city: String, completionHandler: @escaping(Result<TodayForecast, ErrorInRequest>) -> Void)
+    func getLastFiveDaysForecast(for city: String, completionHandler: @escaping(Result<ForecastList, ErrorInRequest>) -> Void)
 }
 
 final class CityDetailAPI: CityDetailAPIProtocol {
@@ -22,13 +22,14 @@ final class CityDetailAPI: CityDetailAPIProtocol {
     
     // MARK: Enum
     enum Endpoint: String {
-        case cityForecast = "/data/2.5/weather"
+        case cityForecast = "/data/2.5/forecast"
     }
     // MARK: - Internal Init
     init() {
     }
     
-    func getWeather(for city: String, completionHandler: @escaping(Result<TodayForecast, ErrorInRequest>) -> Void) {
+    // MARK: Protocol Implementation
+    func getLastFiveDaysForecast(for city: String, completionHandler: @escaping(Result<ForecastList, ErrorInRequest>) -> Void) {
         guard let url: URL = getUrlForCityForecast(cityName: city) else {
             return
         }
@@ -50,7 +51,7 @@ final class CityDetailAPI: CityDetailAPIProtocol {
             }
 
             do {
-                let todayForecast: TodayForecast = try JSONDecoder().decode(TodayForecast.self, from: data)
+                let todayForecast: ForecastList = try JSONDecoder().decode(ForecastList.self, from: data)
                 completionHandler(.success(todayForecast))
             } catch {
                 debugPrint("❌ Error Decoding JSON ❌")
