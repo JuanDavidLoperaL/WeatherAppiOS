@@ -48,6 +48,8 @@
 		ACB22E222544A3BF00F577D2 /* CityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB22E212544A3BF00F577D2 /* CityCollectionViewCell.swift */; };
 		ACB423002544B6A100F114C2 /* DelegateCitiesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB422FE2544B6A000F114C2 /* DelegateCitiesCollectionView.swift */; };
 		ACB423012544B6A100F114C2 /* DatasourceCitiesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACB422FF2544B6A000F114C2 /* DatasourceCitiesCollectionView.swift */; };
+		ACBB7CE925455F66007F07E3 /* HomeViewTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBB7CE825455F66007F07E3 /* HomeViewTest.swift */; };
+		ACBB7CF4254563C9007F07E3 /* SettingsViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBB7CF3254563C9007F07E3 /* SettingsViewModelTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +117,8 @@
 		ACB22E212544A3BF00F577D2 /* CityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityCollectionViewCell.swift; sourceTree = "<group>"; };
 		ACB422FE2544B6A000F114C2 /* DelegateCitiesCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegateCitiesCollectionView.swift; sourceTree = "<group>"; };
 		ACB422FF2544B6A000F114C2 /* DatasourceCitiesCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatasourceCitiesCollectionView.swift; sourceTree = "<group>"; };
+		ACBB7CE825455F66007F07E3 /* HomeViewTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewTest.swift; sourceTree = "<group>"; };
+		ACBB7CF3254563C9007F07E3 /* SettingsViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +190,8 @@
 		AC1807FD25446C5700C88580 /* WeatherAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				ACBB7CF025456382007F07E3 /* Settings */,
+				ACBB7CE625455F47007F07E3 /* Home */,
 				AC1807FE25446C5700C88580 /* WeatherAppTests.swift */,
 				AC18080025446C5700C88580 /* Info.plist */,
 			);
@@ -492,6 +498,38 @@
 			path = DatasourceDelegateCollectionView;
 			sourceTree = "<group>";
 		};
+		ACBB7CE625455F47007F07E3 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				ACBB7CE725455F52007F07E3 /* ViewModel */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		ACBB7CE725455F52007F07E3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ACBB7CE825455F66007F07E3 /* HomeViewTest.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ACBB7CF025456382007F07E3 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				ACBB7CF2254563B9007F07E3 /* ViewModel */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		ACBB7CF2254563B9007F07E3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ACBB7CF3254563C9007F07E3 /* SettingsViewModelTest.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -665,6 +703,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC1807FF25446C5700C88580 /* WeatherAppTests.swift in Sources */,
+				ACBB7CE925455F66007F07E3 /* HomeViewTest.swift in Sources */,
+				ACBB7CF4254563C9007F07E3 /* SettingsViewModelTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
