@@ -15,6 +15,7 @@ protocol HomeViewControllerDelegate: AnyObject {
     func remove(annotation: MKPointAnnotation)
     func reloadCitiesList()
     func navigateToCityDetail(with cityInfo: LocationInfo)
+    func errorInAnnotation()
 }
 
 final class HomeViewController: UIViewController {
@@ -56,6 +57,13 @@ final class HomeViewController: UIViewController {
 
 // MARK: - Protocol ViewModel
 extension HomeViewController: HomeViewControllerDelegate {
+    func errorInAnnotation() {
+        let alert: UIAlertController = UIAlertController(title: "Error", message: "We got a error trying to add the bookmark, please be sure that you are tapping in the correct place and try again", preferredStyle: .alert)
+        let alertOk: UIAlertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(alertOk)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func add(annotationInMap: MKPointAnnotation) {
         baseView.add(annotationInMap: annotationInMap)
     }

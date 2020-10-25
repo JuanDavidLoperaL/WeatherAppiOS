@@ -132,7 +132,7 @@ extension CityDetailViewModel {
                 self?.delegate?.setupTodayForecast()
                 self?.delegate?.reloadTableView()
             case .failure(_):
-                print("")
+                self?.delegate?.errorInRequest()
             }
         }
     }
