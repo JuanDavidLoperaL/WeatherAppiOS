@@ -171,6 +171,7 @@
 		AC1807E625446C5400C88580 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				ACBB7D0125456B40007F07E3 /* Extension */,
 				AC6A988D2545251800D55481 /* AppSettingManager */,
 				AC7D28042544D57400060300 /* RequestManager */,
 				AC18083A2544732F00C88580 /* ViewProtocol */,
@@ -528,6 +529,13 @@
 				ACBB7CF3254563C9007F07E3 /* SettingsViewModelTest.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ACBB7D0125456B40007F07E3 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

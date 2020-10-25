@@ -10,6 +10,7 @@ import UIKit
 protocol CityDetailViewControllerDelegate: AnyObject {
     func setupTodayForecast()
     func reloadTableView()
+    func errorInRequest()
 }
 
 final class CityDetailViewController: UIViewController {
@@ -61,5 +62,16 @@ extension CityDetailViewController: CityDetailViewControllerDelegate {
     
     func reloadTableView() {
         baseView.reloadTableView()
+    }
+    
+    func errorInRequest() {
+        DispatchQueue.main.async {
+            let alert: UIAlertController = UIAlertController(title: "Error", message: "We got a error trying fetch the city data, check if you internet connection is ok and try again", preferredStyle: .alert)
+            let alertOk: UIAlertAction = UIAlertAction(title: "OK", style: .default) { _ in
+                self.navigationController?.popViewController(animated: true)
+            }
+            alert.addAction(alertOk)
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }

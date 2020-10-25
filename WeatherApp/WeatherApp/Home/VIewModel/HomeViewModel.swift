@@ -131,7 +131,7 @@ extension HomeViewModel {
                 self?.delegate?.add(annotationInMap: annotationInMap)
                 self?.delegate?.reloadCitiesList()
             } else {
-                //TODO: Put a Error view and say try again
+                self?.delegate?.errorInAnnotation()
             }
         }
     }
