@@ -102,4 +102,8 @@ extension HomeViewController: HomeBaseViewDelegate {
         let helpViewController: HelpScreenViewController = HelpScreenViewController()
         self.navigationController?.pushViewController(helpViewController, animated: true)
     }
+    
+    func filterTexting(word: String) {
+        viewModel.filter(by: word)
+    }
 }

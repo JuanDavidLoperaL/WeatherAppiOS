@@ -12,6 +12,7 @@ protocol HomeBaseViewDelegate: AnyObject {
     func editButtonTouched()
     func settingsButtonTouched()
     func helpButtonTouched()
+    func filterTexting(word: String)
 }
 
 final class HomeBaseView: UIView {
@@ -142,6 +143,7 @@ extension HomeBaseView: ViewConfiguration {
     func configureUI() {
         self.backgroundColor = .yellow
         setupGestureRecognizer()
+        filterTextField.delegate = self
     }
     
     func addViews() {
@@ -283,5 +285,18 @@ extension HomeBaseView {
     
     func reloadCitiesList() {
         citiesListCollectionView.reloadData()
+    }
+}
+
+// MARK: - TextField Delegate
+extension HomeBaseView: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if string.isEmpty {
+            textField.text?.removeLast()
+        } else {
+            textField.text = "\(textField.text ?? "")\(string)"
+        }
+        delegate?.filterTexting(word: textField.text ?? "")
+        return false
     }
 }

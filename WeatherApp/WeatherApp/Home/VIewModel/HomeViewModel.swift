@@ -36,11 +36,16 @@ final class HomeViewModel {
             delegate?.editButton(shouldShow: shouldShowEditButton)
         }
     }
+    private var coordinatesInMapFilter:  [LocationInfo] = [LocationInfo]()
     
     // MARK: - Internal Properties
     var cellIndex: Int = 0
     var itemSelected: Int = 0 {
         didSet {
+            guard coordinatesInMapFilter.isEmpty else {
+                delegate?.navigateToCityDetail(with: coordinatesInMapFilter[itemSelected])
+                return
+            }
             if coordinatesInMap.indices.contains(itemSelected) {
                 delegate?.navigateToCityDetail(with: coordinatesInMap[itemSelected])
             }
@@ -55,6 +60,9 @@ final class HomeViewModel {
     
     // MARK: - Computed Properties
     var cityName: String {
+        guard coordinatesInMapFilter.isEmpty else {
+            return coordinatesInMapFilter[cellIndex].cityName
+        }
         if coordinatesInMap.indices.contains(cellIndex) {
             return coordinatesInMap[cellIndex].cityName
         } else{
@@ -63,6 +71,9 @@ final class HomeViewModel {
     }
     
     var cityLocation: String {
+        guard coordinatesInMapFilter.isEmpty else {
+            return "\(StringsText.Home.latitude): \(coordinatesInMapFilter[cellIndex].coordinates.latitude)\n\(StringsText.Home.longitude): \(coordinatesInMapFilter[cellIndex].coordinates.longitude)"
+        }
         if coordinatesInMap.indices.contains(cellIndex) {
             return "\(StringsText.Home.latitude): \(coordinatesInMap[cellIndex].coordinates.latitude)\n\(StringsText.Home.longitude): \(coordinatesInMap[cellIndex].coordinates.longitude)"
         } else {
@@ -104,7 +115,11 @@ extension HomeViewModel {
     }
     
     func getItemsAmountInCollection() -> Int {
-        return coordinatesInMap.count
+        if coordinatesInMapFilter.isEmpty {
+            return coordinatesInMap.count
+        } else {
+            return coordinatesInMapFilter.count
+        }
     }
     
     func getAnnotation(with coordinates: CLLocationCoordinate2D) {
@@ -119,7 +134,17 @@ extension HomeViewModel {
                 //TODO: Put a Error view and say try again
             }
         }
-
+    }
+    
+    func filter(by text: String) {
+        if text.isEmpty {
+            coordinatesInMapFilter = [LocationInfo]()
+        } else {
+            coordinatesInMapFilter = coordinatesInMap.filter({ cityInfo -> Bool in
+                return cityInfo.cityName.contains(text)
+            })
+        }
+        self.delegate?.reloadCitiesList()
     }
 }
 
