@@ -8,4 +8,6 @@ import Foundation
 
 enum ErrorInRequest: Error {
     case errorGettingCity
+    case errorInResponse
+    case errorInRequest
 }
